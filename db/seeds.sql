@@ -1,2 +1,2 @@
-INSERT INTO department (name)
-VALUES ()
+-- INSERT INTO department (id, name)
+-- VALUES ("name");
