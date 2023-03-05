@@ -1,4 +1,4 @@
-  <a href="https://mighty-sierra-88367.herokuapp.com/">
+  <a href="#">
     <img src="images/ORGANILIZE-logo.png" alt="Organilize" title="Organilize"  height="200" width="80%"/>
 </a>
 
