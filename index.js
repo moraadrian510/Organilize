@@ -214,20 +214,46 @@ const organilize_tracker = () => {
                         message: 'Wich employee would you like to update?',
                         choices: () => {
                             var array = [];
-                            for (var i = 0; i < result.length; i++) { 
+                            for (var i = 0; i < result.length; i++) {
                                 array.push(result[i].last_name);
                             }
                             var employeeArray = [...new set(array)];
+                            return employeeArray;
                         }
                     },
                     {
-                        ///update new role
+                        ///updates new role
                         type: 'list',
                         name: 'role',
-                        me
+                        message: 'Wich role would you like to update?',
+                        choices: () => {
+                            var array = [];
+                            for (var i = 0; i < result.length; i++) {
+                                array.push(result[i].title)
+                            }
+                            var newArray = [...new set(array)]
+                            return newArray;
+                        }
                     }
-                ])
+                ]).then((answers) => {
+                    for(var i = 0; i < result.length; i++) {
+                        if (result[i].last_name === answers.employee) {
+                            var name = result[i];
+                        }
+                    }
+                    for (var i= 0; i < result.length; i++){
+                        if (result[i].title === answers.role) {
+                            var role = result[i];
+                        }
+                    }
+
+                    db.query(`UPDATE employee SET ? WHERE ?`, [{role_id: role}, {last_name: name}], (err, result) => {
+                        if (err) throw err;
+                        console.log(`Updated ${answers.employee} role to database.`)
+                        organilize_tracker();
+                    })
+                })
             })
-        }
+        } 
     });
 };
