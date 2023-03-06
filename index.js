@@ -28,7 +28,7 @@ const organilize_tracker = () => {
                 organilize_tracker();
             })
         } else if (answers.prompt === 'View all roles') {
-            db, query(`SELECT * FROM roles`, (err, result) => {
+            db.query(`SELECT * FROM roles`, (err, result) => {
                 if (err) throw err;
                 console.log("View all roles");
                 console.table(result);
@@ -62,19 +62,76 @@ const organilize_tracker = () => {
                 });
             })
         } else if (answers.prompt === 'Add a role') {
-            inquirer.prompt([{
-                //adding new role 
-                type: 'input',
-                name: 'role',
-                message: 'What is the name of role you want to add?',
-                validate: roleInput => {
-                    if (roleInput) {
-                        return true;
-                    } else {
-                        console.log('Please enter name of role');
-                    }
-                }
-            }])
+            inquirer.prompt([
+                //gathering data to choose from database
+                db.query(`SELECT * FROM depeartment`, (err, result) => {
+                    if (err) throw err;
+
+                    inquirer.prompt([
+                        {
+                            //Adding new role
+                            type: 'input',
+                            name: 'role',
+                            message: 'What is the name of role?',
+                            validate: roleInput => {
+                                if (roleInput) {
+                                    return true;
+                                } else {
+                                    console.log('Please enter a role!');
+                                    return false;
+                                }
+                            }
+                        },
+                        {
+                            //Adding salary
+                            type: 'input',
+                            name: 'salary',
+                            message: 'What is the role salary?',
+                            validate: salaryInput => {
+                                if (salaryInput){
+                                    return true;
+                                } else {
+                                    console.log('Please enter role salary!');
+                                    return false;
+                                }
+                            }
+                        },
+                        {
+                            //department
+                            type: 'list',
+                            name: 'department',
+                            message: 'Wich department does the role belong to?',
+                            choices: () => {
+                                var array = [];
+                                for (var i = 0; i < result.length; i++) {
+                                    array.push(result[i].name);
+                                }
+                                return array;
+                            }
+                        }
+                    ]).then((answers) => {
+                        //comparing the result and storing into variable
+                        for (var i = 0; i < result.length; i++) {
+                            if (result[i].name === answers.department) {
+                                var department = result[i];
+                            }
+                        }
+
+                        db.query(`INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)`, [answers.role, answers.salary, department_id], (err, result) => {
+                            if (err) throw err;
+                            console.log(`Added ${answers.role} to the database`);
+                        })
+                    });
+                })
+            ]);
+        } else if (answers.prompt === 'Add employee') {
+            //calling database to gather roles and managers
+            db.query(`SELECT * FROM employee, role`, (err, result) => {
+                if (err) throw err;
+                inquirer.prompt([
+                    
+                ])
+            })
         }
     });
 };
