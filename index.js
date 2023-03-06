@@ -254,6 +254,9 @@ const organilize_tracker = () => {
                     })
                 })
             })
-        } 
+        } else if (answers.prompt === 'Log Out'){
+            db.end();
+            console.log("GOOD-BYE!")
+        }
     });
 };
