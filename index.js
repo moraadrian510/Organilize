@@ -61,6 +61,7 @@ const organilize_tracker = () => {
                     organilize_tracker();
                 });
             })
+            //////////////////////////////// adding role
         } else if (answers.prompt === 'Add a role') {
             inquirer.prompt([
                 //gathering data to choose from database
@@ -124,6 +125,7 @@ const organilize_tracker = () => {
                     });
                 })
             ]);
+            //////////////////////////////Adding employee
         } else if (answers.prompt === 'Add employee') {
             //calling database to gather roles and managers
             db.query(`SELECT * FROM employee, role`, (err, result) => {
@@ -200,6 +202,6 @@ const organilize_tracker = () => {
                     });
                 })
             })
-        }
+        } else if (answers.prompt === ')
     });
 };
