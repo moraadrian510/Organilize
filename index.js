@@ -16,7 +16,7 @@ const organilize_tracker = () => {
             type: 'list',
             name: 'prompt',
             message: 'What would you like to do?',
-            choices: ['View all departments', 'View all roles', 'View all emplopyees', 'Add a department', 'Add a role', 'Add employee', 'Update an employee','Log Out']
+            choices: ['View all departments', 'View all roles', 'View all emplopyees', 'Add a department', 'Add a role', 'Add employee', 'Update an employee', 'Log Out']
         },
     ]).then((answers) => {
         //views the department table in database
@@ -88,7 +88,7 @@ const organilize_tracker = () => {
                             name: 'salary',
                             message: 'What is the role salary?',
                             validate: salaryInput => {
-                                if (salaryInput){
+                                if (salaryInput) {
                                     return true;
                                 } else {
                                     console.log('Please enter role salary!');
@@ -129,7 +129,62 @@ const organilize_tracker = () => {
             db.query(`SELECT * FROM employee, role`, (err, result) => {
                 if (err) throw err;
                 inquirer.prompt([
-                    
+                    {
+                        //Adding employee first name
+                        type: 'input',
+                        name: 'firstName',
+                        message: 'What id the employees name?',
+                        validate: firstNameInput => {
+                            if (firstNameInput) {
+                                return true;
+                            } else {
+                                console.log('Please enter a name!')
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        //Adding employee last name
+                        type: 'input',
+                        name: 'lastName',
+                        message: 'What id the employees last name? ',
+                        validate: lastNameInput => {
+                            if (lastNameInput) {
+                                return true;
+                            } else {
+                                console.log('Please anter employee las name!')
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        //Adding employee role 
+                        type: 'input',
+                        name: 'role',
+                        message: 'What id the employees role?',
+                        choices: () => {
+                            var array = [];
+                            for (var i = 0; i < result.length; i++) {
+                                array.push(result[i].title);
+                            }
+                            var newArray = [...new set(array)];
+                            return newArray;
+                        }
+                    },
+                    {
+                        // Adding employess manager
+                        type: 'input',
+                        name: 'manager',
+                        message: 'Who is the employees manager?',
+                        validate: managerInput => {
+                            if (managerInput) {
+                                return true;
+                            } else {
+                                console.log('Please add manager!')
+                                return false;
+                            }
+                        }
+                    }
                 ])
             })
         }
