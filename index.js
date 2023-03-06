@@ -185,7 +185,20 @@ const organilize_tracker = () => {
                             }
                         }
                     }
-                ])
+                ]).then((answers) => {
+                    //comparing results and storing into variable
+                    for (var i = 0; i < result.length; i++) {
+                        if (result[i].title === answers.role) {
+                            var role = result[i]
+                        }
+                    }
+
+                    db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) values (?,?,?,?)`, [answers.firstName, answers.lastName, role.id, answers.manager.id], (err, result) => {
+                        if (err) throw err;
+                        console.log(`Added ${answers.firstName} ${lastName} to database.`)
+                        organilize_tracker();
+                    });
+                })
             })
         }
     });
