@@ -202,6 +202,32 @@ const organilize_tracker = () => {
                     });
                 })
             })
-        } else if (answers.prompt === ')
+        } else if (answers.prompt === 'Update an employee') {
+            // gathering database information
+            db.query(`SELECT * FROM employee , role`, (err, result) => {
+                if (err) throw err;
+                //choice of emplyee to update
+                inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'employee',
+                        message: 'Wich employee would you like to update?',
+                        choices: () => {
+                            var array = [];
+                            for (var i = 0; i < result.length; i++) { 
+                                array.push(result[i].last_name);
+                            }
+                            var employeeArray = [...new set(array)];
+                        }
+                    },
+                    {
+                        ///update new role
+                        type: 'list',
+                        name: 'role',
+                        me
+                    }
+                ])
+            })
+        }
     });
 };
