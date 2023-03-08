@@ -28,6 +28,8 @@ CREATE TABLE employee (
     FOREIGN KEY (role_id)
         REFERENCES role(id)
         ON DELETE SET NULL,
+    INDEX man_ind (manager_id),
+    CONSTRAINT fk_manager
     FOREIGN KEY (manager_id)
         REFERENCES employee(id)
         ON DELETE SET NULL

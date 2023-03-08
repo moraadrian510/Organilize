@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const db = require('./db/connection');
-const cTable = require('console.table');
+
 
 //connecting to mysql database
 db.connect(function (err) {
@@ -21,14 +21,18 @@ const organilize_tracker = () => {
     ]).then((answers) => {
         //views the department table in database
         if (answers.prompt === 'View all departments') {
-            db.query(`SELECT  * FROM department`, (err, result) => {
-                if (err) throw err;
-                console.log("View all departments");
-                console.table(result);
-                organilize_tracker();
+            db.promise().query('SELECT * FROM department').then(([data]) => {
+                console.table(data)
+                organilize_tracker()
             })
+            // db.promise().query(`SELECT  * FROM department`, (err, result) => {
+            //     if (err) throw err;
+            //     console.log("View all departments");
+            //     console.table(result);
+            //     organilize_tracker();
+            // })
         } else if (answers.prompt === 'View all roles') {
-            db.query(`SELECT * FROM roles`, (err, result) => {
+            db.query(`SELECT * FROM role`, (err, result) => {
                 if (err) throw err;
                 console.log("View all roles");
                 console.table(result);
@@ -217,7 +221,7 @@ const organilize_tracker = () => {
                             for (var i = 0; i < result.length; i++) {
                                 array.push(result[i].last_name);
                             }
-                            var employeeArray = [...new set(array)];
+                            var employeeArray = [...new Set(array)];
                             return employeeArray;
                         }
                     },
@@ -231,7 +235,7 @@ const organilize_tracker = () => {
                             for (var i = 0; i < result.length; i++) {
                                 array.push(result[i].title)
                             }
-                            var newArray = [...new set(array)]
+                            var newArray = [...new Set(array)]
                             return newArray;
                         }
                     }
@@ -260,3 +264,5 @@ const organilize_tracker = () => {
         }
     });
 };
+
+organilize_tracker();
