@@ -16,7 +16,7 @@ const organilize_tracker = () => {
             type: 'list',
             name: 'prompt',
             message: 'What would you like to do?',
-            choices: ['View all departments', 'View all roles', 'View all emplopyees', 'Add a department', 'Add a role', 'Add employee', 'Update an employee', 'Log Out']
+            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add employee', 'Update an employee', 'Log Out']
         },
     ]).then((answers) => {
         //views the department table in database
@@ -39,7 +39,7 @@ const organilize_tracker = () => {
                 organilize_tracker();
             });
         } else if (answers.prompt === 'View all employees') {
-            db.query(`SELECT * FROM employees`, (err, result) => {
+            db.query(`SELECT * FROM employee`, (err, result) => {
                 if (err) throw err;
                 console.log("View all employees");
                 console.table(result);
@@ -139,7 +139,7 @@ const organilize_tracker = () => {
                         //Adding employee first name
                         type: 'input',
                         name: 'firstName',
-                        message: 'What id the employees name?',
+                        message: 'What is the employees name?',
                         validate: firstNameInput => {
                             if (firstNameInput) {
                                 return true;
@@ -153,7 +153,7 @@ const organilize_tracker = () => {
                         //Adding employee last name
                         type: 'input',
                         name: 'lastName',
-                        message: 'What id the employees last name? ',
+                        message: 'What is the employees last name? ',
                         validate: lastNameInput => {
                             if (lastNameInput) {
                                 return true;
@@ -167,7 +167,7 @@ const organilize_tracker = () => {
                         //Adding employee role 
                         type: 'input',
                         name: 'role',
-                        message: 'What id the employees role?',
+                        message: 'What ism the employees role?',
                         choices: () => {
                             var array = [];
                             for (var i = 0; i < result.length; i++) {
