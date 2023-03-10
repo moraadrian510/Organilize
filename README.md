@@ -14,8 +14,7 @@
 - [Acknowledgements](#acknowledgements)
 
 ## Overview
-![](images/OOOOOO.png)
-[Check out the live video!!](https://drive.google.com/file/d/18Fbx6TZYY-1Hbz21vcP3caYAWEh-PtjB/view)
+<img src="images/OOOOOO.png"  width="400" height="400">   [Check the live video](https://drive.google.com/file/d/18Fbx6TZYY-1Hbz21vcP3caYAWEh-PtjB/view)
 
 ### Built With
 
