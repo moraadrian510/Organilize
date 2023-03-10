@@ -16,6 +16,8 @@
 ## Overview
 <img src="images/OOOOOO.png"  width="400" height="400">   **[Check the live video](https://drive.google.com/file/d/18Fbx6TZYY-1Hbz21vcP3caYAWEh-PtjB/view)**
 
+With **Organilize** you can keep track of staff memebers their department of work and other information like the members i.d and role in ther respective company. yYou can also update new eployess give them an i.d and the department they will be working under.
+
 ### Built With
 
 
