@@ -38,14 +38,15 @@ Everyone is permitted to copy and distribute verbatim copies of this license doc
 
 
 ## Features
-With *Organilize*,
 
-<img src="images/View all-Depts.
-png"  width="400" height="80">
+ <img src="images/OOOOOO.png"  width="200" height="150">   
+
+
+With *Organilize*,
 
 * You can view all departments, roles, employees by name and i.d.
 * Easily add roles to employees as well as add new employees and departments.
-* Update employess status by changing their role s and also departments if any change has happened.
+* Update employess status by changing their roles and also departments if any change has happened.
 
 ## Contact
 
